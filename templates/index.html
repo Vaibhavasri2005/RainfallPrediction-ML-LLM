@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rainfall Prediction System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1>🌦️ Rainfall Prediction System</h1>
+                <p class="subtitle">AI-Powered Weather Analysis with Explainable Predictions</p>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Input Section -->
+            <div class="card input-section">
+                <h2>Enter Weather Data</h2>
+                <p class="card-subtitle">Provide current weather conditions for rainfall prediction</p>
+                
+                <form id="predictionForm">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="temperature">
+                                <span class="label-icon">🌡️</span>
+                                Temperature (°C)
+                            </label>
+                            <input 
+                                type="number" 
+                                id="temperature" 
+                                name="temperature" 
+                                step="0.1" 
+                                min="-50" 
+                                max="50" 
+                                value="25"
+                                required
+                            >
+                            <span class="input-hint">Range: -50 to 50°C</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="humidity">
+                                <span class="label-icon">💧</span>
+                                Humidity (%)
+                            </label>
+                            <input 
+                                type="number" 
+                                id="humidity" 
+                                name="humidity" 
+                                step="0.1" 
+                                min="0" 
+                                max="100" 
+                                value="75"
+                                required
+                            >
+                            <span class="input-hint">Range: 0 to 100%</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="pressure">
+                                <span class="label-icon">🔽</span>
+                                Atmospheric Pressure (hPa)
+                            </label>
+                            <input 
+                                type="number" 
+                                id="pressure" 
+                                name="pressure" 
+                                step="0.1" 
+                                min="900" 
+                                max="1100" 
+                                value="1010"
+                                required
+                            >
+                            <span class="input-hint">Range: 900 to 1100 hPa</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="wind_speed">
+                                <span class="label-icon">💨</span>
+                                Wind Speed (km/h)
+                            </label>
+                            <input 
+                                type="number" 
+                                id="wind_speed" 
+                                name="wind_speed" 
+                                step="0.1" 
+                                min="0" 
+                                max="100" 
+                                value="15"
+                                required
+                            >
+                            <span class="input-hint">Range: 0 to 100 km/h</span>
+                        </div>
+                    </div>
+
+                    <div class="button-group">
+                        <button type="submit" class="btn btn-primary" id="predictBtn">
+                            <span class="btn-icon">🔮</span>
+                            Predict Rainfall
+                        </button>
+                        <button type="button" class="btn btn-secondary" id="randomBtn">
+                            <span class="btn-icon">🎲</span>
+                            Random Values
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Results Section -->
+            <div class="card results-section" id="resultsSection" style="display: none;">
+                <h2>Prediction Results</h2>
+                
+                <!-- Main Prediction -->
+                <div class="prediction-result" id="predictionResult">
+                    <div class="prediction-icon" id="predictionIcon">☁️</div>
+                    <div class="prediction-text" id="predictionText">Rain Expected</div>
+                    <div class="confidence-badge" id="confidenceBadge">
+                        <span class="confidence-label">Confidence:</span>
+                        <span class="confidence-value" id="confidenceValue">85%</span>
+                    </div>
+                </div>
+
+                <!-- Probability Bars -->
+                <div class="probability-section">
+                    <h3>Probability Breakdown</h3>
+                    <div class="probability-bar-container">
+                        <div class="probability-label">
+                            <span>🌧️ Rain</span>
+                            <span id="rainProb">85%</span>
+                        </div>
+                        <div class="probability-bar">
+                            <div class="probability-fill rain-fill" id="rainProbBar"></div>
+                        </div>
+                    </div>
+                    <div class="probability-bar-container">
+                        <div class="probability-label">
+                            <span>☀️ No Rain</span>
+                            <span id="noRainProb">15%</span>
+                        </div>
+                        <div class="probability-bar">
+                            <div class="probability-fill no-rain-fill" id="noRainProbBar"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Explanation -->
+                <div class="explanation-section">
+                    <h3>AI Explanation</h3>
+                    <div class="insight-box" id="insightBox">
+                        <p id="mainInsight">Strong indicators suggest rain is likely.</p>
+                    </div>
+                    
+                    <div class="factors-list" id="factorsList">
+                        <!-- Factors will be dynamically inserted here -->
+                    </div>
+                </div>
+
+                <!-- Input Summary -->
+                <div class="input-summary">
+                    <h3>Weather Conditions Used</h3>
+                    <div class="summary-grid" id="summaryGrid">
+                        <!-- Summary will be dynamically inserted here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Loading Indicator -->
+            <div class="loading" id="loadingIndicator" style="display: none;">
+                <div class="spinner"></div>
+                <p>Analyzing weather data...</p>
+            </div>
+
+            <!-- Error Message -->
+            <div class="error-message" id="errorMessage" style="display: none;">
+                <span class="error-icon">⚠️</span>
+                <span id="errorText">An error occurred</span>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Powered by Machine Learning & AI Explanations</p>
+            <p class="footer-note">Logistic Regression Model with Natural Language Processing</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

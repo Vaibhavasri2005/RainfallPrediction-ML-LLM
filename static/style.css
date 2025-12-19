@@ -1,0 +1,469 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #3498db;
+    --secondary-color: #2ecc71;
+    --danger-color: #e74c3c;
+    --warning-color: #f39c12;
+    --dark-color: #2c3e50;
+    --light-color: #ecf0f1;
+    --gray-color: #95a5a6;
+    --success-color: #27ae60;
+    --rain-color: #3498db;
+    --no-rain-color: #f39c12;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 20px;
+    color: var(--dark-color);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Header */
+.header {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: var(--shadow-lg);
+    text-align: center;
+}
+
+.header-content h1 {
+    font-size: 2.5rem;
+    color: var(--dark-color);
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    color: var(--gray-color);
+    font-size: 1.1rem;
+}
+
+/* Cards */
+.card {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: var(--shadow-lg);
+}
+
+.card h2 {
+    color: var(--dark-color);
+    margin-bottom: 10px;
+    font-size: 1.8rem;
+}
+
+.card-subtitle {
+    color: var(--gray-color);
+    margin-bottom: 25px;
+}
+
+/* Form Styles */
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+    margin-bottom: 30px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-weight: 600;
+    color: var(--dark-color);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.label-icon {
+    font-size: 1.3rem;
+}
+
+.form-group input {
+    padding: 12px 15px;
+    border: 2px solid var(--light-color);
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+.input-hint {
+    font-size: 0.85rem;
+    color: var(--gray-color);
+    margin-top: 5px;
+}
+
+/* Buttons */
+.button-group {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 15px 30px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: center;
+    flex: 1;
+    min-width: 200px;
+}
+
+.btn-primary {
+    background: var(--primary-color);
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #2980b9;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+}
+
+.btn-secondary {
+    background: var(--gray-color);
+    color: white;
+}
+
+.btn-secondary:hover {
+    background: #7f8c8d;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+}
+
+.btn-icon {
+    font-size: 1.2rem;
+}
+
+/* Prediction Result */
+.prediction-result {
+    text-align: center;
+    padding: 40px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 12px;
+    margin-bottom: 30px;
+    color: white;
+}
+
+.prediction-result.rain {
+    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+}
+
+.prediction-result.no-rain {
+    background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+}
+
+.prediction-icon {
+    font-size: 4rem;
+    margin-bottom: 15px;
+}
+
+.prediction-text {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.confidence-badge {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 10px 25px;
+    border-radius: 50px;
+    font-size: 1.1rem;
+}
+
+.confidence-value {
+    font-weight: 700;
+    margin-left: 5px;
+}
+
+/* Probability Section */
+.probability-section {
+    margin-bottom: 30px;
+}
+
+.probability-section h3 {
+    color: var(--dark-color);
+    margin-bottom: 20px;
+    font-size: 1.3rem;
+}
+
+.probability-bar-container {
+    margin-bottom: 20px;
+}
+
+.probability-label {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--dark-color);
+}
+
+.probability-bar {
+    height: 30px;
+    background: var(--light-color);
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.probability-fill {
+    height: 100%;
+    transition: width 0.6s ease;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 10px;
+    color: white;
+    font-weight: 600;
+}
+
+.rain-fill {
+    background: linear-gradient(90deg, var(--rain-color), #2980b9);
+}
+
+.no-rain-fill {
+    background: linear-gradient(90deg, var(--no-rain-color), #e67e22);
+}
+
+/* Explanation Section */
+.explanation-section {
+    margin-bottom: 30px;
+}
+
+.explanation-section h3 {
+    color: var(--dark-color);
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+}
+
+.insight-box {
+    background: linear-gradient(135deg, #667eea22 0%, #764ba222 100%);
+    padding: 20px;
+    border-radius: 10px;
+    border-left: 4px solid var(--primary-color);
+    margin-bottom: 20px;
+}
+
+.insight-box p {
+    font-size: 1.1rem;
+    color: var(--dark-color);
+    line-height: 1.6;
+}
+
+.factors-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.factor-item {
+    display: flex;
+    align-items: start;
+    gap: 12px;
+    padding: 15px;
+    background: var(--light-color);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.factor-item:hover {
+    transform: translateX(5px);
+    box-shadow: var(--shadow);
+}
+
+.factor-icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.factor-content {
+    flex: 1;
+}
+
+.factor-text {
+    color: var(--dark-color);
+    line-height: 1.5;
+}
+
+.factor-contribution {
+    font-size: 0.9rem;
+    color: var(--gray-color);
+    margin-top: 5px;
+}
+
+/* Input Summary */
+.input-summary h3 {
+    color: var(--dark-color);
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+}
+
+.summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.summary-item {
+    background: var(--light-color);
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.summary-label {
+    font-size: 0.9rem;
+    color: var(--gray-color);
+    margin-bottom: 5px;
+}
+
+.summary-value {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--dark-color);
+}
+
+/* Loading Indicator */
+.loading {
+    text-align: center;
+    padding: 40px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: var(--shadow-lg);
+    margin-bottom: 30px;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid var(--light-color);
+    border-top-color: var(--primary-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 20px;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.loading p {
+    color: var(--gray-color);
+    font-size: 1.1rem;
+}
+
+/* Error Message */
+.error-message {
+    background: #ffebee;
+    color: var(--danger-color);
+    padding: 20px;
+    border-radius: 10px;
+    border-left: 4px solid var(--danger-color);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.error-icon {
+    font-size: 2rem;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    color: white;
+    padding: 20px;
+    margin-top: 30px;
+}
+
+.footer p {
+    margin-bottom: 5px;
+}
+
+.footer-note {
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .header-content h1 {
+        font-size: 2rem;
+    }
+    
+    .subtitle {
+        font-size: 1rem;
+    }
+    
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .button-group {
+        flex-direction: column;
+    }
+    
+    .btn {
+        width: 100%;
+    }
+    
+    .prediction-text {
+        font-size: 1.5rem;
+    }
+    
+    .summary-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.results-section {
+    animation: fadeIn 0.5s ease;
+}
