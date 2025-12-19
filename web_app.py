@@ -77,6 +77,8 @@ def predict():
     }
     """
     try:
+        # Ensure model is initialized
+        initialize_model()
         # Get data from request
         data = request.get_json()
         
